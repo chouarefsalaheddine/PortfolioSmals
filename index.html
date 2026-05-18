@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio Smals — Audit Stratégique | Salaheddine Chouaref</title>
+<style>
+:root{
+  --navy:#0E2A47;
+  --blue:#1F66B0;
+  --accent:#FFC845;
+  --light:#F4F7FB;
+  --gray:#5A6B7B;
+  --line:#E1E8F0;
+  --green:#2E8B57;
+  --red:#C0392B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter','Segoe UI',Arial,sans-serif;
+  color:#1A2A3A;background:#fff;line-height:1.6;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(14,42,71,.97);backdrop-filter:blur(8px);
+  padding:14px 6%;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+nav .brand{color:#fff;font-weight:700;letter-spacing:.5px;font-size:14px}
+nav .brand span{color:var(--accent)}
+nav ul{display:flex;gap:18px;flex-wrap:wrap;list-style:none}
+nav ul a{color:#cfd9e3;font-size:12.5px;font-weight:500}
+nav ul a:hover{color:var(--accent);text-decoration:none}
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0E2A47 0%,#1F66B0 100%);
+  color:#fff;text-align:center;padding:120px 6% 60px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 30%,rgba(255,200,69,.15),transparent 40%),
+             radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 50%);
+}
+.hero-inner{position:relative;z-index:1;max-width:900px}
+.hero .tag{
+  display:inline-block;padding:6px 14px;border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;font-size:12px;letter-spacing:1.5px;margin-bottom:30px;
+  text-transform:uppercase;color:var(--accent);
+}
+.hero h1{
+  font-size:clamp(2.5rem,7vw,5rem);font-weight:800;letter-spacing:-1px;
+  line-height:1.05;margin-bottom:24px;
+}
+.hero h1 span{color:var(--accent)}
+.hero .subtitle{font-size:clamp(1rem,1.6vw,1.25rem);opacity:.9;max-width:700px;margin:0 auto 36px;font-weight:300}
+.hero .author{
+  border-top:1px solid rgba(255,255,255,.2);padding-top:20px;margin-top:30px;
+  font-size:13px;letter-spacing:.5px;color:#cfd9e3;
+}
+.hero .author strong{color:#fff;display:block;font-size:16px;margin-bottom:4px}
+.scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#cfd9e3;font-size:11px;letter-spacing:2px;text-transform:uppercase;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
+/* ===== SECTIONS ===== */
+section{padding:80px 6%;max-width:1200px;margin:0 auto;scroll-margin-top:70px}
+section.alt{background:var(--light);max-width:none;padding-left:max(6%,calc((100% - 1200px)/2));padding-right:max(6%,calc((100% - 1200px)/2))}
+.section-num{
+  color:var(--accent);font-weight:700;letter-spacing:3px;font-size:13px;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.section-num::before{content:"";display:inline-block;width:28px;height:2px;background:var(--accent);vertical-align:middle;margin-right:10px;}
+h2{
+  font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--navy);
+  margin-bottom:24px;letter-spacing:-.5px;line-height:1.15;
+}
+h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin:20px 0 10px;}
+p{margin-bottom:14px;color:#2C3E50}
+strong{color:var(--navy)}
+em{color:var(--blue);font-style:italic}
+/* ===== CARDS ===== */
+.grid{display:grid;gap:18px;margin-top:24px}
+.grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.grid.cols-4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;
+  box-shadow:0 1px 3px rgba(14,42,71,.04);transition:transform .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(14,42,71,.08)}
+.card h4{color:var(--blue);font-size:.95rem;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.card.dark{background:var(--navy);color:#fff}
+.card.dark h4{color:var(--accent)}
+.card.dark p{color:#cfd9e3}
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:24px 0}
+.stat{
+  background:#fff;border-left:4px solid var(--accent);padding:18px;
+  border-radius:6px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.stat .num{font-size:2rem;font-weight:800;color:var(--navy);line-height:1}
+.stat .label{font-size:.8rem;color:var(--gray);margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+/* ===== TABLE ===== */
+table{
+  width:100%;border-collapse:collapse;margin-top:18px;background:#fff;
+  border-radius:8px;overflow:hidden;border:1px solid var(--line);font-size:.92rem;
+}
+th{background:var(--navy);color:#fff;text-align:left;padding:12px 14px;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#FAFBFD}
+/* ===== SWOT ===== */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.swot div{padding:22px;border-radius:10px;border:1px solid var(--line)}
+.swot .s{background:#E8F5E9;border-left:6px solid #2E8B57}
+.swot .w{background:#FCE8E8;border-left:6px solid #C0392B}
+.swot .o{background:#E3F2FD;border-left:6px solid #1F66B0}
+.swot .t{background:#FFF8E1;border-left:6px solid #F39C12}
+.swot h3{margin-top:0;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px}
+.swot ul{margin-left:18px;font-size:.92rem}
+.swot li{margin-bottom:5px}
+@media(max-width:700px){.swot{grid-template-columns:1fr}}
+/* ===== CYCLE ===== */
+.cycle{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px}
+.cycle .step{
+  background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);
+  border-radius:8px;padding:20px;position:relative;
+}
+.cycle .step .phase{color:var(--accent);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:8px;background:var(--navy);display:inline-block;padding:4px 10px;border-radius:4px;color:var(--accent)}
+.cycle .step h3{margin-bottom:6px}
+.cycle .step .period{color:var(--gray);font-size:.85rem;margin-bottom:10px}
+.cycle .step ul{font-size:.88rem;margin-left:18px;color:#2C3E50}
+/* ===== VALUES ===== */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:20px}
+.value{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;text-align:center;transition:.2s}
+.value:hover{border-color:var(--accent);transform:translateY(-3px)}
+.value .icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:50px;height:50px;border-radius:50%;background:var(--navy);color:var(--accent);
+  font-size:1.3rem;font-weight:800;margin-bottom:12px;
+}
+.value h3{margin-bottom:6px;font-size:1rem}
+.value p{font-size:.88rem;color:var(--gray);margin-bottom:0}
+/* ===== CANVAS ===== */
+.canvas{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:24px;font-size:.78rem}
+.canvas .block{background:#fff;border:1px solid var(--line);padding:14px;border-radius:6px}
+.canvas .block h4{color:var(--navy);font-size:.78rem;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--accent);padding-bottom:4px;display:inline-block}
+.canvas .block ul{margin-left:14px;color:#2C3E50}
+.canvas .block li{margin-bottom:3px}
+.canvas .block.tall{grid-row:span 2}
+.canvas .block.full{grid-column:span 2}
+.canvas .full2{grid-column:span 5;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:900px){.canvas{grid-template-columns:1fr 1fr}.canvas .block.tall{grid-row:span 1}.canvas .block.full{grid-column:span 1}.canvas .full2{grid-column:span 2;grid-template-columns:1fr}}
+/* ===== FOOTER ===== */
+footer{
+  background:var(--navy);color:#cfd9e3;padding:60px 6%;text-align:center;
+  border-top:4px solid var(--accent);
+}
+footer .git-link{
+  display:inline-block;padding:14px 30px;background:var(--accent);color:var(--navy);
+  font-weight:700;border-radius:6px;margin:20px 0;font-size:1rem;letter-spacing:.5px;
+}
+footer .git-link:hover{background:#fff;text-decoration:none}
+footer h3{color:#fff;margin-bottom:8px}
+footer p{color:#cfd9e3}
+footer .meta{margin-top:30px;font-size:.85rem;opacity:.6;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag-row span{background:var(--navy);color:var(--accent);padding:6px 12px;border-radius:999px;font-size:.78rem;font-weight:600;letter-spacing:.5px}
+.note{background:#FFF8E1;border-left:4px solid var(--accent);padding:14px 18px;border-radius:6px;font-size:.92rem;margin-top:18px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">SC <span>/</span> Portfolio Smals 2026</div>
+  <ul>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#statuts">01</a></li>
+    <li><a href="#comptes">02</a></li>
+    <li><a href="#pitch">03</a></li>
+    <li><a href="#mission">04</a></li>
+    <li><a href="#canvas">05</a></li>
+    <li><a href="#innovation">06</a></li>
+    <li><a href="#concurrence">07</a></li>
+    <li><a href="#segmentation">08</a></li>
+    <li><a href="#cycle">09</a></li>
+    <li><a href="#financier">10</a></li>
+    <li><a href="#swot">11</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="intro">
+  <div class="hero-inner">
+    <span class="tag">Portfolio Entreprise — Stage 2025-2026</span>
+    <h1>SMALS <span>ASBL</span></h1>
+    <p class="subtitle">Audit stratégique de l'opérateur ICT historique du secteur public belge — sécurité sociale, soins de santé et services publics fédéraux.</p>
+    <div class="author">
+      <strong>Salaheddine Chouaref</strong>
+      ISIB Bruxelles — Master Ingénieur Industriel · 2025-2026
+    </div>
+  </div>
+  <div class="scroll-cue">↓ Scroll</div>
+</header>
+
+<!-- ============ 01 STATUTS ============ -->
+<section id="statuts">
+  <div class="section-num">01 — Statuts de l'entreprise</div>
+  <h2>Forme juridique &amp; identification</h2>
+  <p>Smals est une <strong>Association Sans But Lucratif (ASBL)</strong> de droit belge, fondée le <strong>12 avril 1939</strong> sous le nom initial <em>« Allocations Familiales — Société de Mécanographie »</em>. L'association adopte le nom <em>Smals-MvM</em> en 2003 puis simplement <strong>Smals</strong>. Elle est soumise au Code des sociétés et des associations (CSA) et ses statuts coordonnés sont publiés au Moniteur belge.</p>
+
+  <table>
+    <tr><th>Donnée</th><th>Détail</th></tr>
+    <tr><td>Dénomination officielle</td><td>Smals ASBL</td></tr>
+    <tr><td>Forme juridique</td><td>Association Sans But Lucratif (ASBL)</td></tr>
+    <tr><td>Numéro d'entreprise (BCE)</td><td>BE 0406.798.006</td></tr>
+    <tr><td>Date de constitution</td><td>12 avril 1939</td></tr>
+    <tr><td>Siège social</td><td>Avenue Fonsny 20, 1060 Saint-Gilles (Bruxelles)</td></tr>
+    <tr><td>Activité principale (NACE)</td><td>62.020 — Conseil informatique</td></tr>
+    <tr><td>Publication statuts</td><td>Moniteur belge / <a href="https://www.ejustice.just.fgov.be/tsv/tsvf.htm">eJustice (annexes ASBL)</a></td></tr>
+  </table>
+
+  <h3>Objet social</h3>
+  <p>Smals soutient et seconde les <strong>organismes du secteur social et du secteur des soins de santé</strong>, ainsi que d'autres services publics à leur demande, dans leur gestion de l'information. L'association opère <strong>au prix coûtant</strong>, sans marge bénéficiaire, et exclusivement pour ses membres.</p>
+
+  <h3>Gouvernance</h3>
+  <div class="grid cols-3">
+    <div class="card"><h4>Assemblée générale</h4><p>Réunit l'ensemble des institutions membres, contrôle directement l'ASBL.</p></div>
+    <div class="card"><h4>Conseil d'administration</h4><p>Jusqu'à <strong>25 administrateurs</strong> désignés par l'AG sur proposition des membres. Décisions à la majorité simple.</p></div>
+    <div class="card"><h4>Comité de direction</h4><p>Traduit la stratégie en opérations quotidiennes. Complété par un Comité stratégique et un Comité d'audit.</p></div>
+  </div>
+
+  <p class="note">📑 <strong>Consultation des statuts :</strong> les statuts coordonnés sont consultables sur <a href="https://www.ejustice.just.fgov.be/tsv/tsvf.htm">eJustice — Annexes ASBL</a> en recherchant le numéro d'entreprise <strong>0406.798.006</strong>.</p>
+</section>
+
+<!-- ============ 02 COMPTES ============ -->
+<section class="alt" id="comptes">
+  <div class="section-num">02 — Comptes annuels (BNB)</div>
+  <h2>Dépôt à la Banque Nationale de Belgique</h2>
+  <p>Les comptes annuels de Smals sont déposés chaque année à la <strong>Centrale des bilans de la BNB</strong> conformément aux obligations légales applicables aux grandes ASBL. Le dernier dépôt connu porte sur l'exercice clôturé au <strong>31/12/2024</strong>, déposé le <strong>03/07/2025</strong>.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="num">573 M€</div><div class="label">CA 2024</div></div>
+    <div class="stat"><div class="num">+11 %</div><div class="label">Croissance 23→24</div></div>
+    <div class="stat"><div class="num">2 200+</div><div class="label">Collaborateurs</div></div>
+    <div class="stat"><div class="num">78 %</div><div class="label">Spécialistes ICT</div></div>
+    <div class="stat"><div class="num">54,3 M€</div><div class="label">Économies mutualisées</div></div>
+  </div>
+
+  <h3>Évolution du chiffre d'affaires</h3>
+  <table>
+    <tr><th>Année</th><th>CA (M €)</th><th>Évolution</th></tr>
+    <tr><td>2021</td><td>≈ 390</td><td>—</td></tr>
+    <tr><td>2022</td><td>≈ 439</td><td>+12,6 %</td></tr>
+    <tr><td>2023</td><td>≈ 515</td><td>+17,3 %</td></tr>
+    <tr><td><strong>2024</strong></td><td><strong>573</strong></td><td><strong>+11,3 %</strong></td></tr>
+  </table>
+
+  <h3>Répartition par activité (rapport d'activités Smals)</h3>
+  <table>
+    <tr><th>Activité</th><th>Part</th><th>Tendance</th></tr>
+    <tr><td>Détachement de personnel &amp; spécialistes externes</td><td>≈ 59 %</td><td>↑</td></tr>
+    <tr><td>Infrastructure IT &amp; opérations</td><td>≈ 21 %</td><td>↑</td></tr>
+    <tr><td>Développement d'applications</td><td>≈ 20 %</td><td>↑</td></tr>
+  </table>
+
+  <p class="note">🏦 <strong>Consultation BNB :</strong> les comptes annuels sont consultables gratuitement sur <a href="https://www.nbb.be">www.nbb.be</a> (Centrale des bilans) en saisissant le numéro d'entreprise 0406.798.006.</p>
+</section>
+
+<!-- ============ 03 PITCH ============ -->
+<section id="pitch">
+  <div class="section-num">03 — Pitch de présentation</div>
+  <h2>Smals en 60 secondes</h2>
+  <div class="card dark">
+    <p style="font-size:1.1rem;line-height:1.7;color:#fff;">« Depuis <strong style="color:var(--accent)">1939</strong>, Smals est l'opérateur ICT historique du secteur public belge. ASBL <em style="color:var(--accent)">in-house</em> regroupant plus de <strong style="color:var(--accent)">300 institutions membres</strong>, elle met 2&nbsp;200&nbsp;spécialistes au service de la sécurité sociale, des soins de santé et des SPF — au prix coûtant, sans marge commerciale. »</p>
+  </div>
+  <p style="margin-top:20px">Avec un chiffre d'affaires de <strong>573 M €</strong> en 2024, Smals figure parmi les plus grands employeurs ICT de Belgique. Son modèle <em>« par et pour le secteur public »</em> garantit que chaque euro investi serve directement le citoyen.</p>
+  <p>De l'<strong>eBox</strong> (boîte mail officielle de millions de Belges) à la <strong>plateforme eHealth</strong> (échange médical sécurisé), en passant par <strong>CSAM</strong> (authentification fédérale), la <strong>BCSS</strong> et le <strong>G-Cloud</strong>, Smals est le moteur invisible de la transformation numérique de l'État.</p>
+  <div class="tag-row">
+    <span>eBox</span><span>eHealth</span><span>CSAM</span><span>BCSS</span><span>G-Cloud</span><span>MyPension</span>
+  </div>
+</section>
+
+<!-- ============ 04 MISSION ============ -->
+<section class="alt" id="mission">
+  <div class="section-num">04 — Mission, Vision &amp; Valeurs</div>
+  <h2>Raison d'être</h2>
+  <div class="grid cols-2">
+    <div class="card"><h4>Mission</h4><p>Soutenir et seconder les <strong>organismes du secteur social et du secteur des soins de santé</strong>, ainsi que d'autres services publics à leur demande, dans leur <strong>gestion de l'information</strong>, afin qu'ils puissent offrir une prestation de services efficace et effective à leurs utilisateurs.</p></div>
+    <div class="card"><h4>Vision</h4><p>Devenir et rester le <strong>partenaire ICT de référence du secteur public belge</strong> en mutualisant ressources et expertises, en anticipant les ruptures technologiques (cloud souverain, IA de confiance, cybersécurité, post-quantique) et en plaçant la protection des données personnelles au cœur de chaque solution.</p></div>
+  </div>
+
+  <h3 style="margin-top:30px">Valeurs fondamentales <small style="color:var(--gray);font-weight:400">(source : Smals.be)</small></h3>
+  <div class="values">
+    <div class="value"><div class="icon">①</div><h3>Orientation client</h3><p>La satisfaction des institutions membres et des utilisateurs finaux est la priorité absolue.</p></div>
+    <div class="value"><div class="icon">②</div><h3>Sens des résultats</h3><p>Réaliser les objectifs ensemble, dans le respect des délais, des budgets et des SLA.</p></div>
+    <div class="value"><div class="icon">③</div><h3>Sens des responsabilités</h3><p>Smals et ses collaborateurs sont garants de chaque engagement pris envers les membres et les citoyens.</p></div>
+  </div>
+</section>
+
+<!-- ============ 05 CANVAS ============ -->
+<section id="canvas">
+  <div class="section-num">05 — Business Model Canvas</div>
+  <h2>Logique de création de valeur</h2>
+  <p>Modèle d'Osterwalder appliqué à Smals ASBL — opérateur ICT <em>in-house</em> à but non lucratif.</p>
+
+  <div class="canvas">
+    <div class="block tall">
+      <h4>Partenaires clés</h4>
+      <ul>
+        <li>Institutions de sécurité sociale (ONSS, INAMI, SFP…)</li>
+        <li>SPF Sécurité sociale &amp; SPF Santé publique</li>
+        <li>BCSS, eHealth-platform</li>
+        <li>Fournisseurs ICT privés encadrés</li>
+        <li>Universités &amp; Smals Research</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Activités clés</h4>
+      <ul>
+        <li>Développement logiciel sur mesure</li>
+        <li>Hébergement &amp; opérations (G-Cloud)</li>
+        <li>Intégration interadministrations</li>
+        <li>Cybersécurité, identité</li>
+        <li>R&amp;D appliquée</li>
+      </ul>
+    </div>
+    <div class="block tall" style="background:var(--accent);border-color:var(--accent)">
+      <h4 style="color:var(--navy);border-color:var(--navy)">Proposition de valeur</h4>
+      <ul style="color:var(--navy)">
+        <li><strong>ICT mutualisé au prix coûtant</strong></li>
+        <li>Expertise pointue sur la donnée publique</li>
+        <li>Conformité RGPD &amp; secret professionnel</li>
+        <li>Continuité de service critique</li>
+        <li>54,3 M € d'économies en 2024</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Relation client</h4>
+      <ul>
+        <li>Modèle in-house : membres = clients</li>
+        <li>Account managers dédiés</li>
+        <li>Gouvernance partagée via le CA</li>
+        <li>SLA contractuels</li>
+      </ul>
+    </div>
+    <div class="block tall">
+      <h4>Segments clients</h4>
+      <ul>
+        <li>Institutions publiques de sécurité sociale</li>
+        <li>Acteurs du secteur des soins de santé</li>
+        <li>Autres services publics fédéraux</li>
+        <li>300+ institutions belges</li>
+        <li>Indirectement ≈ 11 M de citoyens</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Ressources clés</h4>
+      <ul>
+        <li>≈ 2 200 collaborateurs (78 % ICT)</li>
+        <li>Data centers &amp; G-Cloud</li>
+        <li>Plateformes BCSS / eHealth</li>
+        <li>Capital de confiance des institutions</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h4>Canaux</h4>
+      <ul>
+        <li>Contrats-cadres avec les membres</li>
+        <li>Account managers</li>
+        <li>Portail clients &amp; services en ligne</li>
+        <li>Publications Smals Research</li>
+      </ul>
+    </div>
+    <div class="full2">
+      <div class="block"><h4>Structure de coûts</h4><ul>
+        <li>Masse salariale (poste principal)</li>
+        <li>Infrastructure &amp; licences</li>
+        <li>Détachement de personnel et spécialistes externes (encadré)</li>
+        <li>R&amp;D, formation, cybersécurité</li>
+      </ul></div>
+      <div class="block"><h4>Sources de revenus</h4><ul>
+        <li>Facturation aux membres <strong>au prix coûtant</strong></li>
+        <li>Aucune marge commerciale (modèle ASBL)</li>
+        <li>CA 2024 : <strong>573 M €</strong></li>
+        <li>Aucune distribution de bénéfices</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 INNOVATION ============ -->
+<section class="alt" id="innovation">
+  <div class="section-num">06 — Positionnement en matière d'innovation</div>
+  <h2>En quoi Smals est-elle innovante ?</h2>
+  <p>Smals dispose d'une cellule de recherche interne — <strong>Smals Research</strong> — dont la mission est d'anticiper les ruptures technologiques utiles au service public belge. Cette R&amp;D appliquée passe à l'échelle sur les plateformes critiques (BCSS, eHealth, G-Cloud).</p>
+
+  <div class="grid cols-2">
+    <div class="card"><h4>① Smals Research</h4><p>Cellule R&amp;D dédiée : IA défensive (détection d'attaques, NLP), cryptographie post-quantique, blockchain, informatique confidentielle, <em>privacy-enhancing technologies</em>.</p></div>
+    <div class="card"><h4>② Intégration interadministrations</h4><p>BCSS et eHealth-platform — modèles européens d'échange de données pseudonymisées sans base centrale, conçus <em>privacy by design</em>.</p></div>
+    <div class="card"><h4>③ Cybersécurité avancée</h4><p>En 2025, le service de <strong>pseudonymisation aveugle</strong> co-développé pour l'eHealth-platform reçoit le prix <em>Runner-up — Best Cybersecurity Innovation Europe</em> à Cybersec Europe.</p></div>
+    <div class="card"><h4>④ Cloud souverain (G-Cloud)</h4><p>Plateforme cloud belge alternative aux hyperscalers pour les données sensibles du secteur public.</p></div>
+    <div class="card"><h4>⑤ APIsation du service public</h4><p>Transformation des systèmes legacy en plateformes <em>API-first</em> (cas Axway) pour faciliter l'interopérabilité entre administrations.</p></div>
+    <div class="card"><h4>⑥ Produits phares pour le citoyen</h4><p><strong>eBox</strong>, <strong>MyPension</strong>, <strong>CSAM</strong>, <strong>eHealth</strong> : services digitaux utilisés par des millions de Belges, primés à plusieurs reprises (Agoria eGov Awards).</p></div>
+  </div>
+
+  <p class="note">💡 Le modèle ASBL <em>in-house</em> à prix coûtant permet de réinvestir 100 % des économies dans l'innovation, sans pression actionnariale. Un composant développé pour une institution profite immédiatement à toutes les autres (<strong>initiative ReUse</strong>).</p>
+</section>
+
+<!-- ============ 07 CONCURRENCE ============ -->
+<section id="concurrence">
+  <div class="section-num">07 — Analyse de la concurrence</div>
+  <h2>Benchmark — qui sont les vrais concurrents ?</h2>
+  <p>Le modèle ASBL <em>in-house</em> place Smals dans une position particulière : ses membres lui confient directement leurs missions, sans appel d'offres concurrentiel. Toutefois, plusieurs acteurs interviennent sur des segments adjacents et constituent une concurrence indirecte ou un benchmark utile.</p>
+
+  <h3>Concurrents publics directs (autres niveaux de pouvoir)</h3>
+  <table>
+    <tr><th>Acteur</th><th>Type</th><th>Périmètre</th><th>Positionnement vs Smals</th></tr>
+    <tr><td><strong>GIAL</strong></td><td>ASBL para-publique</td><td>Ville de Bruxelles, CPAS, communes</td><td>Équivalent local — modèle in-house similaire</td></tr>
+    <tr><td><strong>CIRB / CIBG</strong></td><td>Organisme régional</td><td>Région Bruxelles-Capitale, 250+ administrations</td><td>Équivalent régional — partenaire potentiel</td></tr>
+    <tr><td><strong>ETNIC</strong></td><td>Organisme public</td><td>Fédération Wallonie-Bruxelles, enseignement</td><td>Acteur public complémentaire</td></tr>
+  </table>
+
+  <h3>Concurrence privée indirecte</h3>
+  <table>
+    <tr><th>Acteur</th><th>CA estimé</th><th>Focus</th><th>Modèle</th></tr>
+    <tr><td>NRB</td><td>≈ 350 M €</td><td>Public + privé belge</td><td>Marge commerciale</td></tr>
+    <tr><td>Cegeka</td><td>≈ 900 M €</td><td>Privé + public</td><td>Marge commerciale</td></tr>
+    <tr><td>Cronos Group</td><td>≈ 800 M €</td><td>Privé + public</td><td>Marge commerciale</td></tr>
+    <tr><td>Hyperscalers (AWS, Azure, GCP)</td><td>—</td><td>Cloud mondial</td><td>Alternative au G-Cloud</td></tr>
+  </table>
+
+  <h3>Avantage concurrentiel de Smals</h3>
+  <div class="grid cols-2">
+    <div class="card"><h4>Modèle in-house unique</h4><p>Membres contrôlent l'ASBL ; pas de marge ; transparence totale.</p></div>
+    <div class="card"><h4>85 ans d'expertise sectorielle</h4><p>Connaissance fine des processus de sécurité sociale et de santé publique.</p></div>
+    <div class="card"><h4>Souveraineté des données</h4><p>G-Cloud belge, RGPD strict — alternative crédible aux hyperscalers américains.</p></div>
+    <div class="card"><h4>Mutualisation (ReUse)</h4><p>Économies d'échelle de 54 M € impossibles pour un prestataire privé mono-client.</p></div>
+  </div>
+</section>
+
+<!-- ============ 08 SEGMENTATION ============ -->
+<section class="alt" id="segmentation">
+  <div class="section-num">08 — Segmentation, Ciblage, Positionnement &amp; Différenciation</div>
+  <h2>Stratégie de marché</h2>
+
+  <h3>Segmentation</h3>
+  <table>
+    <tr><th>Segment</th><th>Description</th><th>Exemples</th></tr>
+    <tr><td>Sécurité sociale</td><td>Institutions gérant les droits sociaux</td><td>ONSS, INAMI, SFP, INASTI, FAMIFED, Sigedis, BCSS</td></tr>
+    <tr><td>Soins de santé</td><td>Acteurs du secteur médical et pharmaceutique</td><td>eHealth-platform, SPF Santé publique, hôpitaux</td></tr>
+    <tr><td>Services publics fédéraux</td><td>Administrations fédérales</td><td>SPF Finances, SPF Emploi, BOSA</td></tr>
+    <tr><td>Bénéficiaires indirects</td><td>Citoyens et entreprises utilisateurs des services</td><td>≈ 11,5 M de Belges</td></tr>
+  </table>
+
+  <div class="grid cols-3" style="margin-top:30px">
+    <div class="card"><h4>Ciblage</h4><p>Limité statutairement aux <strong>membres de l'ASBL</strong> : institutions de sécurité sociale (cœur historique), acteurs des soins de santé (croissance), SPF et autres services publics fédéraux.</p></div>
+    <div class="card"><h4>Positionnement</h4><p>« L'opérateur ICT de référence du secteur social et de la santé publique en Belgique. <em>ICT in-house, à prix coûtant, au service du citoyen.</em> »</p></div>
+    <div class="card"><h4>Différenciation</h4><p>Modèle ASBL unique en Europe · Marge 0 % · Expertise sectorielle 85 ans · Souveraineté · ReUse · Smals Research</p></div>
+  </div>
+</section>
+
+<!-- ============ 09 CYCLE DE VIE ============ -->
+<section id="cycle">
+  <div class="section-num">09 — Cycle de vie d'un produit</div>
+  <h2>Cas étudié : eBox citoyen &amp; entreprise</h2>
+  <p>L'<strong>eBox</strong> est la boîte mail officielle sécurisée mise à disposition des citoyens et entreprises belges pour recevoir les documents officiels (allocations, pensions, fiches fiscales…) avec valeur juridique équivalente au recommandé postal.</p>
+
+  <div class="cycle">
+    <div class="step">
+      <span class="phase">① Introduction</span>
+      <h3>2008 — 2012</h3>
+      <p class="period">Conception &amp; lancement</p>
+      <ul>
+        <li>Développement initial</li>
+        <li>Pilotes (ONSS, BCSS)</li>
+        <li>Authentification eID</li>
+        <li>Agoria eGov Award 2012</li>
+      </ul>
+    </div>
+    <div class="step">
+      <span class="phase">② Croissance</span>
+      <h3>2013 — 2018</h3>
+      <p class="period">Adoption étendue</p>
+      <ul>
+        <li>Intégration ONEM, ONVA, Sigedis</li>
+        <li>Lancement eBox Entreprise</li>
+        <li>MySocialSecurity.be</li>
+        <li>Plan Digital Belgium</li>
+      </ul>
+    </div>
+    <div class="step">
+      <span class="phase">③ Maturité</span>
+      <h3>2019 — 2024</h3>
+      <p class="period">Service de masse</p>
+      <ul>
+        <li>Millions d'utilisateurs actifs</li>
+        <li>Intégration MyGov.be / CSAM</li>
+        <li>Accélération Covid-19</li>
+        <li>Substitution au courrier postal</li>
+      </ul>
+    </div>
+    <div class="step">
+      <span class="phase">④ Renouvellement</span>
+      <h3>2025 — …</h3>
+      <p class="period">Réinvention</p>
+      <ul>
+        <li>IA (tri, résumé automatique)</li>
+        <li>Wallet européen (eIDAS 2)</li>
+        <li>Interopérabilité européenne</li>
+        <li>Extension à toutes les administrations</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">📈 Le service se situe en <strong>maturité avancée avec relance par l'innovation</strong> : la plateforme est largement adoptée mais Smals la modernise via l'IA, le wallet européen et la cryptographie post-quantique pour prolonger son cycle de vie.</p>
+</section>
+
+<!-- ============ 10 FINANCIER ============ -->
+<section class="alt" id="financier">
+  <div class="section-num">10 — Diagnostic financier</div>
+  <h2>Analyse financière sur base BNB</h2>
+  <p>Diagnostic établi sur la base des derniers comptes annuels déposés à la Centrale des bilans de la BNB (exercice 2024) et du rapport d'activités Smals 2024.</p>
+
+  <h3>Évolution des indicateurs clés</h3>
+  <table>
+    <tr><th>Indicateur</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th></tr>
+    <tr><td>Chiffre d'affaires</td><td>≈ 390 M €</td><td>≈ 439 M €</td><td>≈ 515 M €</td><td><strong>573 M €</strong></td></tr>
+    <tr><td>Effectif total</td><td>≈ 1 900</td><td>≈ 2 100</td><td>≈ 2 166</td><td><strong>2 200+</strong></td></tr>
+    <tr><td>Économies mutualisées</td><td>—</td><td>≈ 45 M €</td><td>≈ 50 M €</td><td><strong>54,3 M €</strong></td></tr>
+    <tr><td>Part ICT dans l'effectif</td><td>≈ 77 %</td><td>≈ 77 %</td><td>≈ 78 %</td><td><strong>78 %</strong></td></tr>
+  </table>
+
+  <div class="stats">
+    <div class="stat"><div class="num">+47 %</div><div class="label">Croissance CA 2021→2024</div></div>
+    <div class="stat"><div class="num">0 €</div><div class="label">Bénéfice distribué (ASBL)</div></div>
+    <div class="stat"><div class="num">54 M €</div><div class="label">Économies / an</div></div>
+    <div class="stat"><div class="num">~300+</div><div class="label">Institutions membres</div></div>
+  </div>
+
+  <h3>Lecture financière</h3>
+  <div class="grid cols-2">
+    <div class="card"><h4>Rentabilité</h4><p>Par nature, Smals ne vise pas le bénéfice ; ses services sont facturés au prix coûtant. Le résultat de l'exercice est proche de l'équilibre — situation saine pour une ASBL in-house.</p></div>
+    <div class="card"><h4>Solvabilité</h4><p>Fonds propres confortables, dettes essentiellement opérationnelles. Risque financier limité grâce à l'adossement à des membres institutionnels stables.</p></div>
+    <div class="card"><h4>Liquidité</h4><p>Trésorerie alimentée par la facturation régulière aux membres. Cycle d'exploitation court et prévisible, aucune tension observée.</p></div>
+    <div class="card"><h4>Croissance</h4><p>+47 % en 4 ans, tirée par la digitalisation des services publics, l'eHealth-platform et l'extension du G-Cloud. Croissance maîtrisée des effectifs.</p></div>
+  </div>
+
+  <p class="note">📊 <strong>Synthèse :</strong> Smals présente un profil financier <strong>solide, peu risqué et en croissance maîtrisée</strong>, conforme aux attentes d'une ASBL d'intérêt général adossée au secteur public.</p>
+</section>
+
+<!-- ============ 11 SWOT ============ -->
+<section id="swot">
+  <div class="section-num">11 — Analyse SWOT</div>
+  <h2>Synthèse stratégique</h2>
+
+  <div class="swot">
+    <div class="s">
+      <h3>S — Forces</h3>
+      <ul>
+        <li>Modèle ASBL in-house unique en Belgique</li>
+        <li>Ancrage historique depuis 1939</li>
+        <li>2 200+ collaborateurs (78 % ICT)</li>
+        <li>Smals Research : innovation primée (Cybersec Europe 2025)</li>
+        <li>Maîtrise complète de la chaîne BCSS / eHealth</li>
+        <li>Capital de confiance des institutions publiques</li>
+        <li>Solidité financière (CA 573 M €, prix coûtant)</li>
+        <li>Initiative ReUse : 54 M € d'économies / an</li>
+      </ul>
+    </div>
+    <div class="w">
+      <h3>W — Faiblesses</h3>
+      <ul>
+        <li>Dépendance structurelle envers ses membres</li>
+        <li>Recours important au détachement et spécialistes externes</li>
+        <li>Image parfois perçue comme administrative</li>
+        <li>Tensions de recrutement sur les profils ICT senior</li>
+        <li>Legacy technique sur certaines plateformes</li>
+        <li>Marge de manœuvre commerciale limitée (statut ASBL)</li>
+        <li>Visibilité externe grand public faible</li>
+      </ul>
+    </div>
+    <div class="o">
+      <h3>O — Opportunités</h3>
+      <ul>
+        <li>Accélération de la digitalisation du secteur public</li>
+        <li>Demande de cloud souverain (G-Cloud)</li>
+        <li>Montée de l'IA de confiance (AI Act européen)</li>
+        <li>Cryptographie post-quantique &amp; cybersécurité</li>
+        <li>Extension à d'autres SPF</li>
+        <li>Coopération européenne (eIDAS 2, EHDS, EBSI)</li>
+      </ul>
+    </div>
+    <div class="t">
+      <h3>T — Menaces</h3>
+      <ul>
+        <li>Pression des hyperscalers (AWS, Azure, GCP)</li>
+        <li>Évolution réglementaire rapide (NIS2, AI Act, DORA)</li>
+        <li>Cybermenaces croissantes contre le secteur public</li>
+        <li>Concurrence pour les talents ICT</li>
+        <li>Risque politique : remise en cause du modèle in-house</li>
+        <li>Inflation salariale dans l'ICT</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">Conclusion stratégique</h3>
+  <div class="card dark">
+    <p style="color:#fff;line-height:1.7">Smals occupe une position stratégique difficile à reproduire : à la fois <strong style="color:var(--accent)">opérateur historique</strong> et <strong style="color:var(--accent)">innovateur de référence</strong> du secteur social et de la santé en Belgique. Son modèle ASBL in-house lui confère un avantage compétitif structurel (prix coûtant, confiance, souveraineté), tout en l'exposant à une dépendance forte envers ses membres et à une concurrence indirecte croissante des hyperscalers et grands intégrateurs privés.</p>
+    <p style="color:#cfd9e3;margin-top:14px;line-height:1.7">Axes prioritaires : consolidation du <strong style="color:var(--accent)">G-Cloud souverain</strong>, industrialisation d'une <strong style="color:var(--accent)">IA de confiance</strong> conforme à l'AI Act, anticipation <strong style="color:var(--accent)">post-quantique</strong>, renforcement de la marque employeur, modernisation <em style="color:var(--accent)">API-first</em> et <em style="color:var(--accent)">cloud-native</em> des plateformes legacy.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <h3>Salaheddine Chouaref</h3>
+  <p>ISIB Bruxelles — Master Ingénieur Industriel · 2025-2026</p>
+  <a class="git-link" href="https://chouarefsalaheddine.github.io/PortfolioSmals/">🔗 chouarefsalaheddine.github.io/PortfolioSmals</a>
+  <p style="font-size:.85rem">Portfolio en ligne — Audit stratégique réalisé dans le cadre du stage en entreprise chez Smals ASBL.</p>
+  <div class="meta">
+    Portfolio Entreprise 2025-2026 · ISIB · Cours d'Économie &amp; Gestion · Dépôt Isibnet · 18 mai 2026
+  </div>
+</footer>
+
+</body>
+</html>
